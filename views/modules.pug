@@ -1,0 +1,38 @@
+html
+head
+    title Modules | Deepalaya
+    style
+        include ../stylesheets/modules-style.css
+body
+    div.content
+
+        p.title Existing Modules
+        p.subtitle= params.subject + ", Grade " + params.grade
+
+        ul.list
+            each item in modules
+                li.el
+                    p.header= item.title
+                    p.summary= item.description
+                a(href= "/modules/" + params.subject + "/grade/" + params.grade + "/" + user.role + "/" + item._id).btn.lineblock Open Module
+                if user.role == "teacher"
+                    form(method="POST", action=("/remove/module/" + params.subject + "/grade/" + params.grade + "/" + item._id)).lineblock
+                        input(type="submit" value="Remove").btn
+    
+        if user.role == "teacher" 
+            br
+            p.title Create Module
+            form(method="POST", action=("/add/module/" + params.subject + "/grade/" + params.grade))
+                input(type="text", name="title", placeholder="Module Title", required).inp
+                input(type="text", name="description", placeholder="Description", required).inp
+                select(name="type").inp
+                    option(value="video") Video
+                    option(value="image") Image
+                    option(value="document") Text Document
+                    option(value="quiz") Quiz
+                    option(value="assignment") Assignment
+                input(type="url", name="file_locator", placeholder="Content URL").inp
+                input(type="submit" value="Create").btn
+
+        form(method="POST", action="/logout?method=DELETE")
+            input(type="submit", value="Log Out").logout

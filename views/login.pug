@@ -1,0 +1,13 @@
+html
+head
+    title Login | Deepalaya
+    style
+        include ../stylesheets/login-style.css
+body
+    div.content
+        p.title Login
+        form(method="POST", action="/login")
+            input(type="text", name="username", placeholder="Username", required).inp
+            input(type="password", name="password", placeholder="Password", required).inp
+            input(type="submit", value="Log In").logout
+            

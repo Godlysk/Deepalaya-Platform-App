@@ -1,0 +1,45 @@
+html
+head
+    title Modules | Deepalaya
+    style
+        include ../stylesheets/modules-style.css
+body(onload="addEvent()")
+    div.content
+        p.title= chosenModule.title
+        p.subtitle= chosenModule.type
+        p.subtitle.noborder= chosenModule.description
+
+        if chosenModule.file_locator == ""
+            p.summary No Content URL Provided
+        else
+            iframe(src=chosenModule.file_locator, allowfullscreen=true).embed.noborder
+            p.summary= chosenModule.file_locator
+        br
+        br
+
+        if chosenModule.type == "assignment"
+            if user.role == "student"
+                    p.subtitle Upload your Submission
+                    form(method="POST", action="/upload/" + params.subject + "/" + params.grade + "/" + chosenModule._id, enctype="multipart/form-data")
+                        input(type="file", name="file", id="file", required).filein
+                        label(for="file")#filelbl Choose File
+                        input(type="submit", value="Upload").btn
+                    br
+                    br
+
+            p.subtitle Existing Submissions
+            ul.sublist
+                each file in files
+                    li.el
+                        p.header= file.filename
+                        p.summary= "Uploaded by " + file.metadata.uploader
+                        form(method="POST").lineblock
+                            button(formaction=("/download/" + file._id)).btn Download
+                            if user.role == "student"
+                                button(formaction=("/remove/" + params.subject + "/grade/" + params.grade + "/" + chosenModule._id + "/" + file._id + "?method=DELETE")).btn Remove
+
+        form(method="POST", action="/logout?method=DELETE")
+            input(type="submit", value="Log Out").logout
+
+    script
+        include ../frontend/files-frontend.js

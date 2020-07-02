@@ -1,0 +1,18 @@
+html
+head
+    title Subjects | Deepalaya
+    style
+        include ../stylesheets/subjects-style.css
+body
+    div.content
+        p.title= "Welcome, " + user.username
+        p.subtitle Your Subjects
+        ul.list
+            each subject in user.subjects
+                li.el
+                    if user.role == "student"
+                        a(href= "/modules/" + subject + "/grade/" + user.grade).sub= subject
+                    else if user.role == "teacher"
+                        a(href= "/subjects/" + subject).sub= subject
+        form(method="POST", action="/logout?method=DELETE")
+            input(type="submit", value="Log Out").logout

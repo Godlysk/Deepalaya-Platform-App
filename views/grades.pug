@@ -1,0 +1,15 @@
+html
+head
+    title Grade | Deepalaya
+    style
+        include ../stylesheets/subjects-style.css
+body
+    div.content
+        p.title= "Welcome, " + user.username
+        p.subtitle Select Grade
+        ul.list
+            each grade in user.grades
+                li.el
+                    a(href=("/modules/" + params.subject + "/grade/" + grade)).sub= "Grade " + grade
+        form(method="POST", action="/logout?method=DELETE")
+            input(type="submit", value="Log Out").logout
