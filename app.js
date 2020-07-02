@@ -73,6 +73,8 @@ app.get('/files', db.loadAllFiles, (request, response) => {
     response.send(dataset.files); 
 });
 
+app.get('/', (request, response) => { response.redirect('/login'); });
+
 app.get('/login', checkNotAuthenticated, (request, response) => {
     response.render('login');
 });
