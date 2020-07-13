@@ -11,13 +11,15 @@ body
 
         ul.list
             each item in modules
-                li.el
-                    p.header= item.title
-                    p.summary= item.description
-                a(href= "/modules/" + params.subject + "/grade/" + params.grade + "/" + user.role + "/" + item._id).btn.lineblock Open Module
-                if user.role == "teacher"
-                    form(method="POST", action=("/remove/module/" + params.subject + "/grade/" + params.grade + "/" + item._id)).lineblock
-                        input(type="submit" value="Remove").btn
+                div.box
+                    p.sub= item.type
+                    p.coursename= item.title
+                    p.coursedescription= item.description
+                    br
+                    a(href= "/modules/" + params.subject + "/grade/" + params.grade + "/" + user.role + "/" + item._id).gotocourse Open Module
+                    if user.role == "teacher"
+                        form(method="POST", action=("/remove/module/" + params.subject + "/grade/" + params.grade + "/" + item._id))
+                            input(type="submit" value="Remove").gotocourse
     
         if user.role == "teacher" 
             br
