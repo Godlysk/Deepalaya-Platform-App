@@ -84,14 +84,6 @@ const getFiles = () => { return dataset.files; };
 
 // Load, Write functions
 
-const loadUsers = (request, response, next) => {
-    
-}
-
-const addUser = (request, response, next) => {
-
-}
-
 const removeModule = (request, response, next) => {
     dataset.db.collection(modulesCollection).deleteOne({_id: mongodb.ObjectID(request.params.id)}, (err, res) => {
         if (err) throw err;

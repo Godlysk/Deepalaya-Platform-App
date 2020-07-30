@@ -1,3 +1,8 @@
+* {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+}
+
 body {
     font-family: Helvetica, sans-serif;
     text-transform: capitalize;
