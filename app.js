@@ -7,6 +7,7 @@ const bcrypt = require('bcrypt');
 const methodOverride = require('method-override');
 const db = require('./db');
 const initializePassport = require('./pssprt');
+const serverless = require('serverless-http');
 
 const app = express();
 
@@ -190,3 +191,5 @@ async function getHashed(str) {
     }
 }
 
+
+module.exports.handler = serverless(app);
