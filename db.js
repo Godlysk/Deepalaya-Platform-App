@@ -4,7 +4,7 @@ const multer = require('multer');
 const GridFsStorage = require('multer-gridfs-storage');
 const Grid = require('gridfs-stream');
 
-const MONGO_URI = "mongodb+srv://db_admin:deepalaya@deepalaya-project-horfs.gcp.mongodb.net/db?retryWrites=true&w=majority";
+const MONGO_URI = "INSERT_URI_HERE";
 const options = {useNewUrlParser: true};
 
 const dbName = "db";
